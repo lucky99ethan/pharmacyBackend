@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import setContactRoutes from './routes/contactRoutes';
 import setAuthRoutes from './routes/authRoutes';
+import setUserRoutes from './routes/userRoutes';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ mongoose.connect(process.env.MONGODB_URI as string, {
 // Routes
 setContactRoutes(app);
 setAuthRoutes(app);
+setUserRoutes(app);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
