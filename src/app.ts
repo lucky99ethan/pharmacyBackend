@@ -5,6 +5,8 @@ import cors from 'cors';
 import setContactRoutes from './routes/contactRoutes';
 import setAuthRoutes from './routes/authRoutes';
 import setUserRoutes from './routes/userRoutes';
+import setInventoryRoutes from './routes/inventoryRoutes';
+import salesRouter from './routes/salesRoutes';
 
 dotenv.config();
 
@@ -27,10 +29,14 @@ mongoose.connect(process.env.MONGODB_URI as string, {
     console.error('MongoDB connection error:', err);
 });
 
+mongoose.set('useFindAndModify', false);
+
 // Routes
 setContactRoutes(app);
 setAuthRoutes(app);
 setUserRoutes(app);
+setInventoryRoutes(app);
+app.use('/api/sales', salesRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
